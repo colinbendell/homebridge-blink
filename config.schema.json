@@ -93,6 +93,13 @@
                 "title": "Enable Diagnostic Logging on startup",
                 "default": false,
                 "type": "boolean"
+            },
+            "hide-device-ids": {
+                "title": "Hide Device ID",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
             }
         },
         "required": [
@@ -110,7 +117,26 @@
             "items": ["hide-privacy-switch", "hide-alarm", "hide-manual-arm-switch", "hide-enabled-switch", "enable-liveview",
                 "avoid-thumbnail-battery-drain", "camera-thumbnail-refresh-seconds",
                 "camera-status-polling-seconds", "camera-motion-polling-seconds",
-                "enable-verbose-logging", "enable-debug-logging", "enable-startup-diagnostic"]
+                "enable-verbose-logging", "enable-debug-logging", "enable-startup-diagnostic",
+                {
+                    "key": "hide-device-ids",
+                    "add": "Add Another Device ID",
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "div",
+                        "displayFlex": true,
+                        "flex-direction": "row",
+                        "items": [
+                          {
+                            "key": "hide-device-ids[]",
+                            "placeholder": "Device ID"
+                          }
+                        ]
+                      }
+                    ]
+                }          
+            ]
         }
     ]
 }

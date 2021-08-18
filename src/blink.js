@@ -117,11 +117,13 @@ class BlinkDevice {
     }
 
     createAccessory(cachedAccessories = [], category = null) {
-        if (this.accessory) return this;
-
-        this.log('Initing: ' + this.canonicalID);
+        if (this.accessory) {
+            this.log(`Using Cached: ${this.name}; ${this.canonicalID}; ${this.uuid}`);
+            return this;
+        }
 
         this.uuid = UUIDGen.generate(this.canonicalID);
+        this.log(`Initing: ${this.name}; ${this.canonicalID}; ${this.uuid}`);
 
         this.accessory = new Accessory(`Blink ${this.name}`, this.uuid, category);
 

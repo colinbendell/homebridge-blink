@@ -50,8 +50,10 @@ class HomebridgeBlink {
             // await this.conn.subscribe(handleUpdates);
             // await this.conn.observe(handleUpdates);
 
+            const hideDeviceIds = this.config['hide-device-ids'] ?? [];
             const data = [...this.blink.networks.values(), ...this.blink.cameras.values()];
-            this.accessoryLookup = data.map(entry => entry.createAccessory(this.cachedAccessories));
+            this.accessoryLookup = data.map(entry => entry.createAccessory(this.cachedAccessories))
+                .filter(entry => !(hideDeviceIds.includes(entry.uuid)));
 
             this.api.unregisterPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, this.cachedAccessories);
             this.cachedAccessories = [];
